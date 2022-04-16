@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,98 +8,91 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-namespace zadanie1
+namespace menu
 {
-    public partial class Form1 : Form
+    public partial class zadanie_1 : Form
     {
-        public Form1()
+        public zadanie_1()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+       
         private void button1_Click(object sender, EventArgs e)
         {
-            string prise = Convert.ToString(textBox1.Text);
-            string yearOfRelease = Convert.ToString(textBox2.Text);
-            string frequencyOfGPU = Convert.ToString(textBox3.Text);
-            string manufacturer = Convert.ToString(textBox4.Text);
-            string memoryVolume = Convert.ToString(textBox5.Text);
-            string articyl = Convert.ToString(textBox6.Text);
-            Videocard vd1 = new Videocard(prise, yearOfRelease, articyl, frequencyOfGPU, manufacturer, memoryVolume);
+            string цена = Convert.ToString(textBox1.Text);
+            string год_выпуска = Convert.ToString(textBox2.Text);
+            string частота_GPU = Convert.ToString(textBox3.Text);
+            string производитель = Convert.ToString(textBox4.Text);
+            string объем_памяти = Convert.ToString(textBox5.Text);
+            string артикул = Convert.ToString(textBox6.Text);
+            Видеокарты vd1 = new Видеокарты(цена, год_выпуска, артикул, частота_GPU, производитель, объем_памяти);
             vd1.Display(listBox1);
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            string prise = Convert.ToString(textBox1.Text);
-            string yearOfRelease = Convert.ToString(textBox2.Text);
-            string frequency = Convert.ToString(textBox3.Text);
-            string numberOfCores = Convert.ToString(textBox4.Text);
-            string numberOfThread = Convert.ToString(textBox5.Text);
-            string aticyl = Convert.ToString(textBox6.Text);
-            Cpu cp1 = new Cpu(prise, yearOfRelease, aticyl, frequency, numberOfCores, numberOfThread);
+            string цена = Convert.ToString(textBox1.Text);
+            string год_выпуска = Convert.ToString(textBox2.Text);
+            string частота = Convert.ToString(textBox3.Text);
+            string количество_ядер = Convert.ToString(textBox4.Text);
+            string количество_потоков = Convert.ToString(textBox5.Text);
+            string артикул = Convert.ToString(textBox6.Text);
+            Процессоры cp1 = new Процессоры(цена, год_выпуска, артикул, частота, количество_ядер, количество_потоков);
             cp1.Display(listBox1);
         }
     }
-    abstract class Accessories<k>
+    abstract class Комплектующие<k>
     {
-        protected string price; //цена
-        protected string yearOfRelease; //год выпуска
-        protected string articyl;
-        public Accessories(string Price, string YearOfRelease, string Articyl)
+        protected string цена; //цена
+        protected string год_выпуска; //год выпуска
+        protected string артикул;
+        public Комплектующие(string Цена, string Год_выпуска, string Артикул)
         {
-            price = Price;
-            yearOfRelease = YearOfRelease;
-            articyl = Articyl;
+            цена = Цена;
+            год_выпуска = Год_выпуска;
+            артикул = Артикул;
         }
         public abstract void Display(ListBox listBox);
     }
-    class Cpu : Accessories<string>
+    class Процессоры : Комплектующие<string>
     {
-        public string frequency1; //частота
-        public string numberOfCores1; //Количество ядер
-        public string numberOfThread1; //количество потоков
-        public Cpu(string Price, string YearOfRelease, string Articyl, string Frequency, string NumberOfCores, string NumberOfThread)
-        : base(Price, YearOfRelease, Articyl)
+        public string частота1; //частота
+        public string количество_ядер1; //Количество ядер
+        public string количество_потоков1; //количество потоков
+        public Процессоры(string Цена, string Год_выпуска, string Артикул, string Частота, string Количество_ядер, string Количество_потоков)
+        : base(Цена, Год_выпуска, Артикул)
         {
-            frequency = Frequency;
-            numberOfCores = NumberOfCores;
-            numberOfThread = NumberOfThread;
+            частота = Частота;
+            количество_ядер = Количество_ядер;
+            количество_потоков = Количество_потоков;
         }
-        public string frequency { get { return frequency1; } set { frequency1 = value; } }
-        public string numberOfCores { get { return numberOfCores1; } set { numberOfCores1 = value; } }
-        public string numberOfThread { get { return numberOfThread1; } set { numberOfThread1 = value; } }
+        public string частота { get { return частота1; } set { частота1 = value; } }
+        public string количество_ядер { get { return количество_ядер1; } set { количество_ядер1 = value; } }
+        public string количество_потоков { get { return количество_потоков1; } set { количество_потоков1 = value; } }
         public override void Display(ListBox listBox1)
         {
-            listBox1.Items.Add($"Цена {price}, Год выпуска {yearOfRelease}, Частота {frequency}, Количество ядер {numberOfCores}, Количество потоков {numberOfThread}, Артикул {articyl}");
+            listBox1.Items.Add($"Цена {цена}, Год выпуска {год_выпуска}, Частота {частота}, Количество ядер {количество_ядер}, Количество потоков {количество_потоков1}, Артикул {артикул}");
         }
     }
-    class Videocard : Accessories<string>
+    class Видеокарты : Комплектующие<string>
     {
-        public string frequencyOfGPU1; // частота процессора 
-        public string manufacturer1; // производитель 
-        public string memoryVolume1; // объем памяти 
-        public Videocard(string Price, string YearOfRelease, string Articyl, string FrequencyOfGPU, string Manufacturer, string MemoryVolume)
-        : base(Price, YearOfRelease, Articyl)
+        public string частота_процессора1; // частота процессора 
+        public string производитель1; // производитель 
+        public string объем_памяти1; // объем памяти 
+        public Видеокарты(string Цена, string Год_выпуска, string Артикул, string Частота_процессора, string Производитель, string Объем_памяти)
+        : base(Цена, Год_выпуска, Артикул)
         {
-            frequencyOfGPU = FrequencyOfGPU;
-            manufacturer = Manufacturer;
-            memoryVolume = MemoryVolume;
+            частота_процессора = Частота_процессора;
+            производитель = Производитель;
+            объем_памяти = Объем_памяти;
         }
-        public string frequencyOfGPU { get { return frequencyOfGPU1; } set { frequencyOfGPU1 = value; } }
-        public string manufacturer { get { return manufacturer1; } set { manufacturer1 = value; } }
-        public string memoryVolume { get { return memoryVolume1; } set { memoryVolume1 = value; } }
+        public string частота_процессора { get { return частота_процессора1; } set { частота_процессора1 = value; } }
+        public string производитель { get { return производитель1; } set { производитель1 = value; } }
+        public string объем_памяти { get { return объем_памяти1; } set { объем_памяти1 = value; } }
         public override void Display(ListBox listBox1)
         {
-            listBox1.Items.Add($"Цена {price}, Год выпуска {yearOfRelease}, Частота процессора  {frequencyOfGPU}, Производительность {manufacturer1}, Объем памяти {memoryVolume}, Артикул {articyl}");
+            listBox1.Items.Add($"Цена {цена}, Год выпуска {год_выпуска}, Частота процессора  {частота_процессора}, Производитель {производитель1}, Объем памяти {объем_памяти}, Артикул {артикул}");
         }
     }
 }
-
-    
-
-      
